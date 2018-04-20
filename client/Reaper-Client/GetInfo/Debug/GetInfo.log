@@ -1,0 +1,6 @@
+﻿  stdafx.cpp
+  GetProcess.cpp
+c:\users\group10\desktop\reaper\client\reaper-client\getinfo\getprocess.cpp(61): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  GetUsername.cpp
+c:\users\group10\desktop\reaper\client\reaper-client\getinfo\getusername.cpp(15): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Generating Code...
