@@ -50,7 +50,7 @@ def clientthread(conn):
             #Mac address incoming
             print("[D] MAC Address: " + str(client_data[:17]) + '\n')
         elif conn_type == b'IPIPADDR':
-            print("[D] IP Address: " + str(clent_data) + '\n')
+            print("[D] IP Address: " + str(client_data) + '\n')
         elif conn_type == b'STORETXT':
             print("[D] Connection Type: STORE TEXT (STORETXT)")
             #TODO actually store the data
