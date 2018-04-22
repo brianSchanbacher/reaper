@@ -25,7 +25,7 @@ def clientthread(conn):
         data_len = len(data)
         print("[+] Recieved " + str(data_len) + " bytes of data")
 
-        print(data + '\n')
+        print(data)
 
         if data_len < 16:
             print("[-] Discarded Invalid Block - Reason: too small")
