@@ -48,7 +48,7 @@ def clientthread(conn):
             print("[D] Connection Type: TEST (12345678)")
         elif conn_type == b'MACCADDR':
             #Mac address incoming
-            print("MAC Address: " + str(client_data))
+            print("MAC Address: " + str(client_data[:17]))
         elif conn_type == b'STORETXT':
             print("[D] Connection Type: STORE TEXT (STORETXT)")
             #TODO actually store the data
