@@ -48,7 +48,7 @@ def clientthread(conn):
             print("[D] Connection Type: TEST (12345678)")
         elif conn_type == b'MACCADDR':
             #Mac address incoming
-            print("[D] MAC Address: " + str(client_data[:17]) + '\n')
+            print("[D] MAC Address: " + client_data[:17].decode('ascii') + '\n')
         elif conn_type == b'IPIPADDR':
             print("[D] IP Address: " + client_data[:15].decode('ascii') + '\n')
         elif conn_type == b'STORETXT':
@@ -60,7 +60,7 @@ def clientthread(conn):
             #TODO check ./actions/ for action files send them back to the client
             print("[+] Action Requested")
         else:
-            print("[?] Unknown connection type: " + str(conn_type))
+            print("[?] Unknown connection type: " + conn_type.decode('ascii'))
 
     conn.close()
 
