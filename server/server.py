@@ -22,7 +22,7 @@ def clientthread(conn):
     while True:
         data = conn.recv(4096)
 
-        print("DEBUG\n" + data.decode('ascii') + "\nDEBUG\n")
+        print("DEBUG\n" + str(data) + "\nDEBUG\n")
 
         data_len = len(data)
         print("[+] Recieved " + str(data_len) + " bytes of data")
