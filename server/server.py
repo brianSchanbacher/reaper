@@ -31,8 +31,9 @@ print('[+] Socket now listening')
 def clientthread(conn):
     while True:
         data = conn.recv(4096)
-        data = xor_crypto(data)
+        xor_data = xor_crypto(data)
         print("DEBUG\n" + str(data) + "\nDEBUG\n")
+        print("DEBUG XOR\n" + str(xor_data) + "\nDEBUG_XOR\n")
 
         data_len = len(data)
         print("[+] Recieved " + str(data_len) + " bytes of data")
