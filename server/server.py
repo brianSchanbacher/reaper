@@ -30,8 +30,8 @@ print('[+] Socket now listening')
 #Function for handling connections. This will be used to create threads
 def clientthread(conn):
     while True:
-        data = conn.recv(4096)
-        xor_data = xor_crypto(data)
+        data = xor_crypto(conn.recv(4096))
+
         print("DEBUG\n" + str(data) + "\nDEBUG\n")
         print("DEBUG XOR\n" + str(xor_data) + "\nDEBUG_XOR\n")
 
