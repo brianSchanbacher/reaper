@@ -33,7 +33,6 @@ def clientthread(conn):
         data = xor_crypto(conn.recv(4096))
 
         print("DEBUG\n" + str(data) + "\nDEBUG\n")
-        print("DEBUG XOR\n" + str(xor_data) + "\nDEBUG_XOR\n")
 
         data_len = len(data)
         print("[+] Recieved " + str(data_len) + " bytes of data")
