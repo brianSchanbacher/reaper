@@ -5,6 +5,16 @@ import socket
 import sys
 from _thread import *
 
+def xor_crypto(data):
+    key = b'i' * len(data)
+    int_data = int.from_bytes(data, sys.byteorder)
+    int_key = int.from_bytes(key, sys.byteorder)
+    int_enc = int_data ^ int_key
+    return int_enc.to_bytes(len(data), sys.byteorder)
+
+#print(xor_crypto(b'dad'))
+#print(xor_crypto(b'\r\x08\r'))
+
 HOST = ''
 PORT = 1337
 
@@ -21,7 +31,7 @@ print('[+] Socket now listening')
 def clientthread(conn):
     while True:
         data = conn.recv(4096)
-
+        data = xor_crypto(data)
         print("DEBUG\n" + str(data) + "\nDEBUG\n")
 
         data_len = len(data)
