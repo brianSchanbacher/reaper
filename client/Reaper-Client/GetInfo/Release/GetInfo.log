@@ -1,0 +1,4 @@
+﻿  stdafx.cpp
+  GetProcesses.cpp
+c:\users\group10\desktop\reaper\client\reaper-client\getinfo\getprocesses.cpp(56): warning C4018: '<': signed/unsigned mismatch
+  GetInfo.vcxproj -> C:\Users\Group10\Desktop\reaper\client\Reaper-Client\Release\GetProcesses.lib

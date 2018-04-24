@@ -1,0 +1,4 @@
+﻿  stdafx.cpp
+  Comms.cpp
+c:\users\group10\desktop\reaper\client\reaper-client\comms\comms.cpp(66): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'PACKET *'
+  Comms.vcxproj -> C:\Users\Group10\Desktop\reaper\client\Reaper-Client\Release\Comms.lib

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -72,6 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>C:\Users\Group10\Desktop\reaper\client\Reaper-Client\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -90,10 +91,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Comms;$(SolutionDir)GetMacAddress</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>GetIP.lib;iphlpapi.lib;ws2_32.lib;Comms.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,12 +123,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Comms</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>GetIP.lib;iphlpapi.lib;ws2_32.lib;Comms.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Group10\Desktop\reaper\client\Reaper-Client\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,7 +155,6 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="VMDetect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Reaper-Client.cpp" />
@@ -159,7 +164,26 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="VMDetect.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Comms\Comms.vcxproj">
+      <Project>{b9a27ffd-525b-4e96-b5bc-58677ec7025e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GetInfo\GetInfo.vcxproj">
+      <Project>{4fe807d2-47a7-45df-9e52-dd9de751da1d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GetIP\GetIP.vcxproj">
+      <Project>{46cfeca8-fc31-44c9-b781-f0bfe04286a4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GetMacAddress\GetMacAddress.vcxproj">
+      <Project>{d645b9e7-0d77-4043-89ee-bc667f3be19a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GetUsername\GetUsername.vcxproj">
+      <Project>{dd0d8a9e-50ac-478a-bcfb-29f633480152}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\VMWareDetect\VMWareDetect.vcxproj">
+      <Project>{246b15f9-7639-4c7c-9143-750388064ff1}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

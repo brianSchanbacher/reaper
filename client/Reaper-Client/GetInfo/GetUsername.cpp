@@ -1,13 +1,16 @@
+#include "stdafx.h"
+
 #include <Windows.h>
 #include <lmcons.h>
+#include <malloc.h>
 
 LPWSTR GetUser() {
 	LPWSTR lpBuffer = (WCHAR*)malloc((UNLEN + 1) * sizeof(WCHAR));
-	LPDWORD lpnSize;
+	DWORD dwSize = UNLEN;
 
 	BOOL success = GetUserName(
 		lpBuffer,
-		lpnSize
+		&dwSize
 	);
 
 	return success ? lpBuffer : NULL;

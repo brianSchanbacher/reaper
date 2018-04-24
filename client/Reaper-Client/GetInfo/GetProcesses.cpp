@@ -1,10 +1,14 @@
-#include <Windows.h>
-#include <Psapi.h>
-#include <stdio.h>
-#include <tchar.h>
-
 #include "stdafx.h"
 
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <Windows.h>
+#include <Psapi.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <tchar.h>
+#include <malloc.h>
 
 TCHAR* GetProcessName(DWORD processID) {
 	TCHAR szProcessName[MAX_PATH] = TEXT("<unknown>");
@@ -34,9 +38,10 @@ TCHAR* GetProcessName(DWORD processID) {
 	return _tcsdup(szProcessName);
 }
 
-void GetProcesses() {
+char* GetProcesses(int *numProcesses) {
 	DWORD processes[1024], pBytesReturned;
-	TCHAR** processNames = (TCHAR**)malloc(1024 * sizeof(TCHAR));
+	TCHAR* processName = (TCHAR*)malloc(1024 * sizeof(TCHAR));
+	char* cpProcessNames = (char*)malloc(4080 * sizeof(char));
 
 	BOOL success = EnumProcesses(
 		processes,
@@ -44,15 +49,20 @@ void GetProcesses() {
 		&pBytesReturned
 	);
 
-	if (!success) return;
+	if (!success) return NULL;
 
-	DWORD numProcesses = pBytesReturned / sizeof(DWORD);
-
-	for (int i = 0; i < numProcesses; i++) {
+	*numProcesses = pBytesReturned / sizeof(DWORD);
+	int count = 0;
+	for (DWORD i = 0; i < *numProcesses; i++) {
 		if (processes[i] != 0) {
-			processNames[i] = GetProcessName(processes[i]);
+			processName = GetProcessName(processes[i]);
+			DWORD strsize = wcslen(processName);
+			wcstombs(cpProcessNames + count, processName, 4080 - count);
+			count++;
 		}
 	}
+
+	return cpProcessNames;
 }
 
 void CleanProcesses(TCHAR* processList[1024]) {
